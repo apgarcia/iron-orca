@@ -6,6 +6,59 @@ Iron Orca is a modern reimagining of the Solaris-era **Orca** and **SE Toolkit**
 ## Motivation
 SNMP and polling-based systems miss short-lived anomalies and produce fragmented data. Iron Orca replaces that with a **push-based, context-rich model**, sampling its metrics using native OS tools on the host being monitored rather than polling that data at intervals from a remote monitoring system.
 
+## Rationale
+
+### The Modern Observability Framework
+
+In today’s language, **observability** typically covers three “pillars”:
+1. **Metrics** – numeric time-series (Prometheus, Datadog, M3, etc.)
+2. **Logs** – text or structured events (Elastic, Loki, CloudWatch)
+3. **Traces** – request path timing (Jaeger, Zipkin, OpenTelemetry)
+
+DevOps teams often combine these into an end-to-end stack using **OpenTelemetry (OTel)** as the standard for collection and propagation.
+- Cloud-native apps expose metrics via HTTP exporters.
+- Infrastructure monitoring (Prometheus node_exporter, cAdvisor, etc.) gathers system data.
+- Everything feeds centralized services that do alerting, visualization, and correlation.
+
+This model works beautifully for *instrumented applications* and *homogeneous Kubernetes clusters.*
+But it’s **overkill and underspecified** for classic systems operations.
+
+---
+
+### ⚙️ Where Iron Orca Fits
+
+### 1. Between SNMP/Nagios and Cloud Observability
+- SNMP/Nagios: lightweight, but too sparse and poll-bound.
+- Prometheus/OTel: rich, but assumes app-level instrumentation and constant scraping.
+
+**Iron Orca** gives ops a *middle path*:
+- Host-centric, high-fidelity metrics (via `sar`)
+- Structured JSON and time-series backend (M3DB)
+- Optional event-driven integration with Nagios/PagerDuty
+
+It’s *modern host observability* for environments that aren’t fully cloud-native.
+
+#### 2. Complement to OpenTelemetry
+OTel’s scope stops at the app boundary. It doesn’t know about kernel wait queues, IO saturation, or swap storms.
+Iron Orca fills that blind spot: it describes **how the machine itself feels**, using metrics that OTel doesn’t provide.
+
+#### 3. For the DevOps “Ops” Side
+Cloud SRE tools focus on app latency and traces; DevOps engineers still need **bare-metal truth.**
+Iron Orca gives them that truth in an accessible, scriptable form — not a vendor dashboard, not an ancient RRD view.
+
+#### 4. Philosophical Niche
+- Prometheus says: *“Poll everyone constantly.”*
+- Datadog says: *“Ship everything to us.”*
+- Adrian Cockcroft says: *“Let nodes tell you how they feel.”*
+- **Iron Orca says:** *“Do just enough of all three.”*
+
+---
+
+### Summary
+Iron Orca occupies a missing tier in today’s observability ecosystem —
+**lightweight, node-aware, and self-reporting infrastructure observability** for hybrid or traditional ops environments.
+It bridges old-school system monitoring and modern cloud telemetry with a pragmatic, open-source approach.
+
 ---
 
 ## Core Architecture
