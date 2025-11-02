@@ -1,7 +1,7 @@
 # 🐋 Iron Orca — Project Snapshot (v1.0, November 2025)
 
 ## Concept
-Iron Orca is a modern reimagining of the Solaris-era **Orca** and **SE Toolkit**, designed to collect high-resolution host metrics locally, shape them into structured data, and feed them into a scalable backend for fleet-wide observability and analysis.
+Iron Orca is a modern reimagining of the Solaris-era **Orca** and **SE Toolkit**, designed to collect host metrics locally, shape them into structured data, and feed them into a scalable backend for fleet-wide observability and analysis.
 
 ## Motivation
 SNMP and polling-based systems miss short-lived anomalies and produce fragmented data. Iron Orca replaces that with a **push-based, context-rich model**, sampling its metrics using native OS tools on the host being monitored rather than polling that data at intervals from a remote monitoring system.
