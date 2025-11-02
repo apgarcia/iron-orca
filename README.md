@@ -25,7 +25,7 @@ But it’s **overkill and underspecified** for classic systems operations.
 
 ---
 
-### ⚙️ Where Iron Orca Fits
+### Where Iron Orca Fits
 
 ### 1. Between SNMP/Nagios and Cloud Observability
 - SNMP/Nagios: lightweight, but too sparse and poll-bound.
